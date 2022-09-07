@@ -29,6 +29,6 @@ export default class AddNote extends Command
 		// https://github.com/WiseLibs/better-sqlite3/blob/master/docs/api.md#runbindparameters---object
 		const query = Sqlite.prepare("INSERT INTO 'notes' (noteTitle, noteDescription, createdAt) VALUES (?, ?, datetime('now'))");
 		const result = query.run(title, description);
-		return interaction.editReply(`Success! Added ${result.changes} note.`);
+		return interaction.reply(`Success! Added ${result.changes} note.`);
 	}
 }

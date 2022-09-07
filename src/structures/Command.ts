@@ -1,10 +1,10 @@
 import DiscordClient from "../classes/DiscordClient";
-import { SlashCommandBuilder } from "@discordjs/builders";
-import { RESTPostAPIApplicationCommandsJSONBody,
+import { SlashCommandBuilder,
 	ApplicationCommandOption,
 	ChatInputCommandInteraction,
-	ToAPIApplicationCommandOptions,
 	AutocompleteInteraction,
+	RESTPostAPIApplicationCommandsJSONBody,
+	ToAPIApplicationCommandOptions,
 } from "discord.js";
 
 export default class Command

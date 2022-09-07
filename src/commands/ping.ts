@@ -19,6 +19,6 @@ export default class Ping extends Command
 		const rtt = Math.abs(Date.now() - interaction.createdTimestamp);
 		const websocketHeartbeat = Math.floor(this.client.ws.ping);
 
-		return interaction.editReply(`Pong! \n> Websocket Heartbeat: **${websocketHeartbeat}ms**\n> Roundtrip Latency: **${rtt}ms**`);
+		return interaction.reply(`Pong! \n> Websocket Heartbeat: **${websocketHeartbeat}ms**\n> Roundtrip Latency: **${rtt}ms**`);
 	}
 }

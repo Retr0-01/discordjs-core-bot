@@ -28,7 +28,7 @@ export default class RemoveNote extends Command
 		const result = query.run(title);
 
 		if (result.changes === 0) return interaction.editReply("Note not found. No notes where removed");
-		return interaction.editReply(`Success! Removed ${result.changes} note(s).`);
+		return interaction.reply(`Success! Removed ${result.changes} note(s).`);
 	}
 
 	// We will utilize the dynamic ability of Autocomplete to show the user the

@@ -26,7 +26,7 @@ export default class Annoy extends Command
 		const targetUser = interaction.options.getUser("user", true);
 		const message = interaction.options.getString("message", true);
 
-		interaction.editReply(`Alright, I will annoy ${targetUser.username}`);
+		interaction.reply(`Alright, I will annoy ${targetUser.username}`);
 		return interaction.channel?.send(`Hey <@${targetUser.id}>, user <@${interaction.user.id}> wants you to ${message}.`);
 	}
 

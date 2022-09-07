@@ -28,7 +28,7 @@ export default class GetNote extends Command
 		const note: Note = query.get(title);
 
 		if (!note) return interaction.editReply("No note found.");
-		return interaction.editReply(`**${note.noteTitle}**\n>>> ${note.noteDescription}\nCreated At: ${note.createdAt}`);
+		return interaction.reply(`**${note.noteTitle}**\n>>> ${note.noteDescription}\nCreated At: ${note.createdAt}`);
 	}
 
 	// We will utilize the dynamic ability of Autocomplete to show the user the list of current notes

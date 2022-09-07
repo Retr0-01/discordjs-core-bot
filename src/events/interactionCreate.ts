@@ -9,7 +9,6 @@ export default class interactionCreate extends Event
 	{
 		if (interaction.isChatInputCommand())
 		{
-			await interaction.deferReply();
 			const command = this.client.commands.get(interaction.commandName);
 
 			if (!command) return;
