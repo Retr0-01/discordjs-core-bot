@@ -1,5 +1,7 @@
-import Event from "../structures/Event";
+import Event from "../classes/Event";
 import { Interaction } from "discord.js";
+import Command from "../classes/Command";
+import ContextMenu from "../classes/ContextMenu";
 
 export default class interactionCreate extends Event
 {
@@ -9,7 +11,7 @@ export default class interactionCreate extends Event
 	{
 		if (interaction.isChatInputCommand())
 		{
-			const command = this.client.commands.get(interaction.commandName);
+			const command = this.client.interactions.get(interaction.commandName) as Command;
 
 			if (!command) return;
 
@@ -20,12 +22,28 @@ export default class interactionCreate extends Event
 			catch (error)
 			{
 				console.error(error);
-				await interaction.reply({ content: "There was an error while executing this command!", ephemeral: true });
+				await interaction.reply({ content: `There was an error while executing slash command ${interaction.commandName}`, ephemeral: true });
+			}
+		}
+		else if (interaction.isContextMenuCommand())
+		{
+			const command = this.client.interactions.get(interaction.commandName) as ContextMenu;
+
+			if (!command) return;
+
+			try
+			{
+				command.execute(interaction);
+			}
+			catch (error)
+			{
+				console.error(error);
+				await interaction.reply({ content: `There was an error while executing context menu command ${interaction.commandName}`, ephemeral: true });
 			}
 		}
 		else if (interaction.isAutocomplete())
 		{
-			const command = this.client.commands.get(interaction.commandName);
+			const command = this.client.interactions.get(interaction.commandName) as Command;
 
 			if (!command) return;
 

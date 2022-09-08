@@ -1,4 +1,3 @@
-/* eslint-disable semi */
 export default interface Note
 {
 	noteTitle: string,

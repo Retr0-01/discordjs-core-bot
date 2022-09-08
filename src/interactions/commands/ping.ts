@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction } from "discord.js";
-import Command from "../structures/Command";
+import Command from "../../classes/Command";
 
 // Example slash command. The simplest type of command to exist.
 // Don't forget to rename the file and the class if you copy-paste this and use it as a snippet.

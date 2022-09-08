@@ -1,5 +1,5 @@
 import { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandStringOption, SlashCommandUserOption } from "discord.js";
-import Command from "../structures/Command";
+import Command from "../../classes/Command";
 
 // Example slash command. Demonstrates command options and autocomplete.
 // Don't forget to rename the file and the class if you copy-paste this and use it as a snippet.

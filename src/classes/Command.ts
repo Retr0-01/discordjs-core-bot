@@ -1,4 +1,4 @@
-import DiscordClient from "../classes/DiscordClient";
+import Interaction from "./Interaction";
 import { SlashCommandBuilder,
 	ApplicationCommandOption,
 	ChatInputCommandInteraction,
@@ -7,17 +7,15 @@ import { SlashCommandBuilder,
 	ToAPIApplicationCommandOptions,
 } from "discord.js";
 
-export default class Command
+/**
+ * Derive from this class to create a new slash command interaction.
+ * https://discordjs.guide/interactions/slash-commands.html
+ */
+export default class Command extends Interaction
 {
-	readonly client: DiscordClient;
 	name = "default";
 	description = "No description provided.";
-	options: ApplicationCommandOption[] = [];
-
-	constructor(client: DiscordClient)
-	{
-		this.client = client;
-	}
+	options?: ApplicationCommandOption[] = [];
 
 	execute(interaction: ChatInputCommandInteraction)
 	{
@@ -35,10 +33,13 @@ export default class Command
 			.setName(this.name)
 			.setDescription(this.description);
 
-		this.options.forEach((option) =>
+		if (this.options)
 		{
-			command.options.push(option as unknown as ToAPIApplicationCommandOptions);
-		});
+			this.options.forEach((option) =>
+			{
+				command.options.push(option as unknown as ToAPIApplicationCommandOptions);
+			});
+		}
 
 		return command.toJSON();
 	}

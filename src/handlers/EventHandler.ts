@@ -1,5 +1,5 @@
 import DiscordClient from "../classes/DiscordClient";
-import Event from "../structures/Event";
+import Event from "../classes/Event";
 import { join } from "path";
 import { readdirSync } from "fs";
 import { Collection } from "discord.js";

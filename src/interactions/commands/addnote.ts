@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction, SlashCommandStringOption } from "discord.js";
-import Command from "../structures/Command";
-import Sqlite from "../classes/Sqlite";
+import Command from "../../classes/Command";
+import Sqlite from "../../classes/Sqlite";
 
 // Example slash command. Demonstrates autocomplete working along with SQLite.
 // Don't forget to rename the file and the class if you copy-paste this and use it as a snippet.

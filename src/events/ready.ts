@@ -1,5 +1,5 @@
 import DiscordClient from "../classes/DiscordClient";
-import Event from "../structures/Event";
+import Event from "../classes/Event";
 import Sqlite from "../classes/Sqlite";
 
 export default class Ready extends Event
@@ -9,7 +9,7 @@ export default class Ready extends Event
 
 	async execute(client: DiscordClient): Promise<void>
 	{
-		await client.commands.deploy();
+		await client.interactions.deploy();
 
 		Sqlite.setup();
 
