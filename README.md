@@ -1,7 +1,7 @@
 # Discord.js Core Bot
 > A fully customizable Discord bot written in TypeScript. Made with Discord.js v14 and Better-SQLite3.
 
-This repository contains the core of a Discord bot powered by Discord.js v14 with support for slash commands, autocomplete interactions and context menus. With Better-SQLite fully setup, you can easily use this template for your own projects and customize the bot to your needs.
+This repository contains the core of a Discord bot powered by Discord.js v14 with support for slash commands, autocomplete interactions, buttons and context menus. With Better-SQLite fully setup, you can easily use this template for your own projects and customize the bot to your needs.
 
 - [Discord.js Core Bot](#discordjs-core-bot)
 	- [Getting Started](#getting-started)
@@ -12,6 +12,7 @@ This repository contains the core of a Discord bot powered by Discord.js v14 wit
 	- [Interactions](#interactions)
 		- [Slash Commands](#slash-commands)
 		- [Autocomplete](#autocomplete)
+		- [Buttons](#buttons)
 		- [Context Menus](#context-menus)
 	- [Using SQLite](#using-sqlite)
 
@@ -54,16 +55,16 @@ Now that the bot is properly installed we need to configurate it. Go into the `s
 | guildIds | An array of Discord server IDs. This is the servers that will have the bot slash commands.                                          |
 
 ## Interactions
-The core bot currently supports slash commands with all kinds of command options, autocomplete interactions and context menus.
+The core bot currently supports slash commands with all kinds of command options, autocomplete interactions, button interactions and context menus.
 
-**NOTE:** Slash commands and context menus get automatically deployed by the interaction handler each time the bot receives the `ready` event, there is nothing else to do on your part.
+**NOTE:** Slash commands and context menus get automatically deployed to the guilds you have set in your config by the interaction handler each time the bot receives the `ready` event, there is nothing else to do on your part.
 
 ### Slash Commands
 To create a new slash command, go into ``/interactions/commands/`` and create a new class which derives from the ``Command`` class.  
-The folder is filled with some example commands which showcase slash commands, command options and usage of the database. Feel free to delete them if you want. 
+The folder is filled with some example commands which showcase slash commands, command options, buttons, autocomplete and usage with the database. Feel free to delete them if you want. 
 
 ### Autocomplete
-Each slash command which has at least one options which enables autocomplete can implement an ``autocomplete()`` method which returns an array of strings, sent to the user as autocomplete options. Make sure you filter your strings according to the user's currently typed focused value. For example:
+Each slash command which has at least one option which enables autocomplete can implement an ``autocomplete()`` method which returns an array of strings. Make sure you filter your strings according to the user's currently typed focused value. For example:
 ```ts
 autocomplete(interaction: AutocompleteInteraction): string[]
 {
@@ -74,8 +75,13 @@ autocomplete(interaction: AutocompleteInteraction): string[]
    return filtered;
 }
 ```
+
+### Buttons
+If one of your slash commands sends a button through an interaction, you can implement the button logic inside the same class for convenience using the ``executeButton()`` method. When you finish building your buttons make sure to register the custom IDs you have set in the ``buttonIds`` array, otherwise the bot won't be able to reply to the button interactions.
+You can see the clickme command for a simple implementation of two buttons.
+
 ### Context Menus
-Similarly to slash commands, go into ``/interactions/contextMenus/`` and create a new context menu command which derives from the ``ContextMenu`` class. Set the type of the context menu to either ``ApplicationCommandType.User`` or ``ApplicationCommandType.Message`` and make sure you also use the correct type in the execute method's interaction parameter (``UserContextMenuInteraction`` and ``MessageContextMenuInteraction`` respectivelly).
+Go into ``/interactions/contextMenus/`` and create a new context menu command which derives from the ``ContextMenu`` class. Set the type of the context menu to either ``ApplicationCommandType.User`` or ``ApplicationCommandType.Message`` and make sure you also use the correct type in the execute method's interaction parameter (``UserContextMenuInteraction`` and ``MessageContextMenuInteraction`` respectivelly).
 
 ## Using SQLite
 > If you don't want to use SQLite at all, comment out the following line of the `index.ts` file:
@@ -85,7 +91,7 @@ Similarly to slash commands, go into ``/interactions/contextMenus/`` and create 
 
 This bot can utilize SQLite to store and retrieve data from a local database. Using the database utility is simple but requires some setup:
 - Modify the `setup.sql` file inside the db folder.
-	- This file contains SQL queries that get executed each time the database is started which means they get executed *every time your bot start*.
+	- This file contains queries that get executed each time the database is started, in other words, *every time your bot starts*.
 - For each table structure you have in your db, you must create a type for it in order to properly handle the data you receive.
   - Inside the `types` folder create any new interfaces you need.
 - Use `Sqlite.prepare()` to prepare a statement, then execute it.

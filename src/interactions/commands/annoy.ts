@@ -2,7 +2,6 @@ import { AutocompleteInteraction, ChatInputCommandInteraction, SlashCommandStrin
 import Command from "../../classes/Command";
 
 // Example slash command. Demonstrates command options and autocomplete.
-// Don't forget to rename the file and the class if you copy-paste this and use it as a snippet.
 export default class Annoy extends Command
 {
 	name = "annoy";

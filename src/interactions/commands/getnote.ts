@@ -4,7 +4,7 @@ import Sqlite from "../../classes/Sqlite";
 import Note from "../../types/Note";
 
 // Example slash command. Demonstrates autocomplete working along with SQLite.
-// Don't forget to rename the file and the class if you copy-paste this and use it as a snippet.
+// This file along with addnote.ts and removenote.ts implement a simple note system using the database.
 export default class GetNote extends Command
 {
 	name = "getnote";
@@ -17,7 +17,6 @@ export default class GetNote extends Command
 			.setAutocomplete(true),
 	];
 
-	// This file along with addnote.ts and removenote.ts implement a simple note system using the database.
 	async execute(interaction: ChatInputCommandInteraction)
 	{
 		const title = interaction.options.getString("title", true);

@@ -2,6 +2,7 @@ import Interaction from "./Interaction";
 import { SlashCommandBuilder,
 	ApplicationCommandOption,
 	ChatInputCommandInteraction,
+	ButtonInteraction,
 	AutocompleteInteraction,
 	RESTPostAPIApplicationCommandsJSONBody,
 	ToAPIApplicationCommandOptions,
@@ -16,10 +17,16 @@ export default class Command extends Interaction
 	name = "default";
 	description = "No description provided.";
 	options?: ApplicationCommandOption[] = [];
+	buttonIds?: string[] = [];
 
 	execute(interaction: ChatInputCommandInteraction)
 	{
 		throw new Error(`Method not implemented for interaction: ${interaction.commandName}`);
+	}
+
+	executeButton(interaction: ButtonInteraction)
+	{
+		throw new Error(`Method not implemented for button: ${interaction.customId}`);
 	}
 
 	autocomplete(interaction: AutocompleteInteraction): string[]

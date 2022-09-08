@@ -25,15 +25,31 @@ export default class interactionCreate extends Event
 				await interaction.reply({ content: `There was an error while executing slash command ${interaction.commandName}`, ephemeral: true });
 			}
 		}
-		else if (interaction.isContextMenuCommand())
+		else if (interaction.isButton())
 		{
-			const command = this.client.interactions.get(interaction.commandName) as ContextMenu;
+			const button = this.client.buttons.get(interaction.customId) as Command;
 
-			if (!command) return;
+			if (!button) return;
 
 			try
 			{
-				command.execute(interaction);
+				button.executeButton(interaction);
+			}
+			catch (error)
+			{
+				console.error(error);
+				await interaction.reply({ content: `There was an error while executing button ${interaction.customId}`, ephemeral: true });
+			}
+		}
+		else if (interaction.isContextMenuCommand())
+		{
+			const contextMenu = this.client.interactions.get(interaction.commandName) as ContextMenu;
+
+			if (!contextMenu) return;
+
+			try
+			{
+				contextMenu.execute(interaction);
 			}
 			catch (error)
 			{
