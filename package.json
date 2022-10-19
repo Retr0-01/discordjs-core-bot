@@ -15,8 +15,10 @@
   },
   "scripts": {
     "dev": "ts-node .",
-    "start": "node .",
-    "lint": "eslint ."
+    "build": "tsc",
+    "prod": "node ./build/index.js",
+    "lint": "eslint .",
+    "pm2": "pm2 start ecosystem.config.js"
   },
   "keywords": [
     "typescript",

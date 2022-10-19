@@ -7,8 +7,8 @@ export default class Sqlite
 	private static _instance: Sqlite;
 
 	db: Database;
-	static dbfile = join(__dirname, "..", "db", "data.db");
-	static setupFile = join(__dirname, "..", "db", "setup.sql");
+	static dbfile = join(__dirname, "..", "..", "db", "data.db");
+	static setupFile = join(__dirname, "..", "..", "db", "setup.sql");
 
 	constructor()
 	{
