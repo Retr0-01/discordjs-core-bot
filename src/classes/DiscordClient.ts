@@ -1,4 +1,5 @@
 import { Client, GatewayIntentBits, Partials } from "discord.js";
+import ProcessManager from "./ProcessManager";
 import EventHandler from "../handlers/EventHandler";
 import InteractionHandler from "../handlers/InteractionHandler";
 import ButtonHandler from "../handlers/ButtonHandler";
@@ -21,6 +22,7 @@ export default class DiscordClient extends Client
 			],
 		});
 
+		new ProcessManager(this);
 		this.login(token);
 	}
 }
