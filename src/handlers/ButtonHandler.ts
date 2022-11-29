@@ -1,9 +1,8 @@
 import DiscordClient from "../classes/DiscordClient";
-import Interaction from "../classes/Interaction";
 import Command from "../classes/Command";
 import { Collection } from "discord.js";
 
-export default class ButtonHandler extends Collection<string, Interaction>
+export default class ButtonHandler extends Collection<string, Command>
 {
 	readonly client: DiscordClient;
 

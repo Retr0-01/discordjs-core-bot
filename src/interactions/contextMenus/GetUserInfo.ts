@@ -1,10 +1,12 @@
 import ContextMenu from "../../classes/ContextMenu";
-import { ApplicationCommandType, UserContextMenuCommandInteraction, EmbedBuilder } from "discord.js";
+import { ApplicationCommandType, UserContextMenuCommandInteraction, EmbedBuilder, ContextMenuCommandBuilder } from "discord.js";
 
 export default class GetUserInfo extends ContextMenu
 {
-	name = "Get User Info";
-	type = ApplicationCommandType.User;
+	data = new ContextMenuCommandBuilder()
+		.setName("Get User Info")
+		.setType(ApplicationCommandType.User);
+	global = true;
 
 	async execute(interaction: UserContextMenuCommandInteraction)
 	{

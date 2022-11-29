@@ -1,31 +1,26 @@
-import Interaction from "./Interaction";
-import { ApplicationCommandType,
-	ContextMenuCommandBuilder,
+import { ContextMenuCommandBuilder,
 	MessageContextMenuCommandInteraction,
-	RESTPostAPIApplicationCommandsJSONBody,
-	UserContextMenuCommandInteraction,
-} from "discord.js";
+	UserContextMenuCommandInteraction } from "discord.js";
+import DiscordClient from "./DiscordClient";
 
 /**
  * Derive from this class to create a new context menu interaction.
  * https://discordjs.guide/interactions/context-menus.html
  */
-export default class ContextMenu extends Interaction
+export default class ContextMenu
 {
-	name = "default";
-	type = ApplicationCommandType.User;
+	readonly client: DiscordClient;
+
+	data: ContextMenuCommandBuilder = new ContextMenuCommandBuilder()
+	global = false;
+
+	constructor(client: DiscordClient)
+	{
+		this.client = client;
+	}
 
 	execute(interaction: UserContextMenuCommandInteraction | MessageContextMenuCommandInteraction)
 	{
 		throw new Error(`Method not implemented for context menu: ${interaction.commandName}`);
-	}
-
-	toJSON(): RESTPostAPIApplicationCommandsJSONBody
-	{
-		const command = new ContextMenuCommandBuilder()
-			.setName(this.name)
-			.setType(this.type as number);
-
-		return command.toJSON();
 	}
 }

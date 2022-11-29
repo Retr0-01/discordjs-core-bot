@@ -52,16 +52,16 @@ Now that the bot is properly installed we need to configurate it. Go into the `s
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | token    | Your bot's token. If you don't know what this [learn here.](https://discordjs.guide/preparations/setting-up-a-bot-application.html) |
 | clientId | The client ID of your bot client.                                                                                                   |
-| guildIds | An array of Discord server IDs. This is the servers that will have the bot slash commands.                                          |
+| guildIds | An array of Discord server IDs for guild-only commands.                                          |
 
 ## Interactions
-The core bot currently supports slash commands with all kinds of command options, autocomplete interactions, button interactions and context menus.
+The core bot fully supports slash commands, autocomplete interactions, button interactions and context menus.
 
 **NOTE:** Slash commands and context menus get automatically deployed to the guilds you have set in your config by the interaction handler each time the bot receives the `ready` event, there is nothing else to do on your part.
 
 ### Slash Commands
 To create a new slash command, go into ``/interactions/commands/`` and create a new class which derives from the ``Command`` class.  
-The folder is filled with some example commands which showcase slash commands, command options, buttons, autocomplete and usage with the database. Feel free to delete them if you want. 
+The folder is filled with some example commands which showcase slash commands, command options, subcommands, buttons, autocomplete and usage with the database. Feel free to delete them if you want. 
 
 ### Autocomplete
 Each slash command which has at least one option which enables autocomplete can implement an ``autocomplete()`` method which returns an array of strings. Make sure you filter your strings according to the user's currently typed focused value. For example:
@@ -81,7 +81,7 @@ If one of your slash commands sends a button through an interaction, you can imp
 You can see the clickme command for a simple implementation of two buttons.
 
 ### Context Menus
-Go into ``/interactions/contextMenus/`` and create a new context menu command which derives from the ``ContextMenu`` class. Set the type of the context menu to either ``ApplicationCommandType.User`` or ``ApplicationCommandType.Message`` and make sure you also use the correct type in the execute method's interaction parameter (``UserContextMenuInteraction`` and ``MessageContextMenuInteraction`` respectivelly).
+Go into ``/interactions/contextMenus/`` and create a new context menu command which derives from the ``ContextMenu`` class. Make sure you also use the correct type in the execute method's interaction parameter according to the type of your context menu (``UserContextMenuInteraction`` for ``ApplicationCommandType.User`` and ``MessageContextMenuInteraction`` for ``ApplicationCommandType.Message``).
 
 ## Using SQLite
 > If you don't want to use SQLite at all, comment out the following line of the `index.ts` file:
@@ -96,4 +96,4 @@ This bot can utilize SQLite to store and retrieve data from a local database. Us
   - Inside the `types` folder create any new interfaces you need.
 - Use `Sqlite.prepare()` to prepare a statement, then execute it.
 
-Check the `*note.ts` files  to see an example implementation.
+Check the `note.ts` file to see an example implementation.

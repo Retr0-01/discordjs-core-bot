@@ -27,7 +27,7 @@ export default class interactionCreate extends Event
 		}
 		else if (interaction.isButton())
 		{
-			const button = this.client.buttons.get(interaction.customId) as Command;
+			const button = this.client.buttons.get(interaction.customId);
 
 			if (!button) return;
 

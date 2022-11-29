@@ -1,15 +1,14 @@
-import { ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, ButtonInteraction } from "discord.js";
+import { SlashCommandBuilder, ChatInputCommandInteraction, ActionRowBuilder, ButtonBuilder, ButtonStyle, ButtonInteraction } from "discord.js";
 import Command from "../../classes/Command";
 
 // Example slash command. Demonstrates button components.
 export default class ClickMe extends Command
 {
-	name = "clickme";
-	description = "Sends a button which you can press.";
-	buttonIds = [
-		"clickMeButton",
-		"dontClickMeButton",
-	]
+	data = new SlashCommandBuilder()
+		.setName("clickme")
+		.setDescription("Sends some cool buttons.")
+	global = true;
+	buttonIds = ["clickMeButton", "dontClickMeButton"];
 
 	async execute(interaction: ChatInputCommandInteraction)
 	{
@@ -28,15 +27,15 @@ export default class ClickMe extends Command
 		await interaction.reply({ content: "I think you should...", components: [buttons] });
 	}
 
-	executeButton(interaction: ButtonInteraction)
+	async executeButton(interaction: ButtonInteraction)
 	{
 		if (interaction.customId === "clickMeButton")
 		{
-			interaction.reply("Thank you for clicking me :)")
+			await interaction.reply("Thank you for clicking me :)")
 		}
 		else
 		{
-			interaction.reply("Why did you click me? :(")
+			await interaction.reply("Why did you click me? :(")
 		}
 	}
 }

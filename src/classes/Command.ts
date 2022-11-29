@@ -1,23 +1,26 @@
-import Interaction from "./Interaction";
-import { SlashCommandBuilder,
-	ApplicationCommandOption,
-	ChatInputCommandInteraction,
+import { ChatInputCommandInteraction,
 	ButtonInteraction,
 	AutocompleteInteraction,
-	RESTPostAPIApplicationCommandsJSONBody,
-	ToAPIApplicationCommandOptions,
-} from "discord.js";
+	SlashCommandBuilder,
+	SlashCommandSubcommandsOnlyBuilder } from "discord.js";
+import DiscordClient from "./DiscordClient";
 
 /**
  * Derive from this class to create a new slash command interaction.
  * https://discordjs.guide/interactions/slash-commands.html
  */
-export default class Command extends Interaction
+export default class Command
 {
-	name = "default";
-	description = "No description provided.";
-	options?: ApplicationCommandOption[] = [];
-	buttonIds?: string[] = [];
+	readonly client: DiscordClient;
+
+	data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder | Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup"> = new SlashCommandBuilder()
+	global = false;
+	buttonIds: string[] = [];
+
+	constructor(client: DiscordClient)
+	{
+		this.client = client;
+	}
 
 	execute(interaction: ChatInputCommandInteraction)
 	{
@@ -32,22 +35,5 @@ export default class Command extends Interaction
 	autocomplete(interaction: AutocompleteInteraction): string[]
 	{
 		throw new Error(`Autocomplete not implemented for interaction: ${interaction.commandName}`);
-	}
-
-	toJSON(): RESTPostAPIApplicationCommandsJSONBody
-	{
-		const command = new SlashCommandBuilder()
-			.setName(this.name)
-			.setDescription(this.description);
-
-		if (this.options)
-		{
-			this.options.forEach((option) =>
-			{
-				command.options.push(option as unknown as ToAPIApplicationCommandOptions);
-			});
-		}
-
-		return command.toJSON();
 	}
 }
