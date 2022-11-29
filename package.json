@@ -1,6 +1,6 @@
 {
   "name": "discordjs-core-bot",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A fully customizable Discord bot written in TypeScript. Made with Discord.js v14 and Better SQLite3.",
   "author": "Retr0#1799",
   "license": "MIT",
@@ -28,7 +28,7 @@
   ],
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
-    "better-sqlite3": "^7.6.2",
+    "better-sqlite3": "^8.0.0",
     "discord-api-types": "^0.37.5",
     "discord.js": "^14.3.0"
   },
