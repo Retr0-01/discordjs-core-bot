@@ -7,7 +7,7 @@ import Note from "../../types/Note";
 //	- Subcommands.
 //	- State management.
 //	- Autocomplete working along with SQLite.
-export default class AddNote extends Command
+export default class NoteCmd extends Command
 {
 	data = new SlashCommandBuilder()
 		.setName("note")

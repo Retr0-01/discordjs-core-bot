@@ -3,7 +3,7 @@ import Command from "../../classes/Command";
 
 // Example slash command. The simplest type of command to exist.
 // Don't forget to rename the file and the class if you copy-paste this and use it as a snippet.
-export default class Ping extends Command
+export default class PingCmd extends Command
 {
 	data = new SlashCommandBuilder()
 		.setName("ping")

@@ -2,7 +2,7 @@ import DiscordClient from "../classes/DiscordClient";
 import Command from "../classes/Command";
 import ContextMenu from "../classes/ContextMenu";
 import { join } from "path";
-import { readdirSync } from "fs";
+import { readdirSync, existsSync } from "fs";
 import { REST } from "@discordjs/rest";
 import { RESTPostAPIApplicationCommandsJSONBody, Routes } from "discord-api-types/v10";
 import { Collection } from "discord.js";
@@ -38,17 +38,24 @@ export default class InteractionHandler extends Collection<string, Command | Con
 
 		// Load context menus.
 		path = join(__dirname, "..", "interactions", "contextMenus");
-		files = readdirSync(path);
-
-		files.forEach((file) =>
+		if (existsSync(path))
 		{
-			const interactionClass = ((r) => r.default || r)(require(join(path, file)));
-			const contextMenu: ContextMenu = new interactionClass(this.client);
+			files = readdirSync(path);
 
-			this.set(contextMenu.data.name, contextMenu);
-			console.log(`Loaded context menu "${contextMenu.data.name}"`);
+			files.forEach((file) =>
+			{
+				const interactionClass = ((r) => r.default || r)(require(join(path, file)));
+				const contextMenu: ContextMenu = new interactionClass(this.client);
 
-		});
+				this.set(contextMenu.data.name, contextMenu);
+				console.log(`Loaded context menu "${contextMenu.data.name}"`);
+
+			});
+		}
+		else
+		{
+			console.log("No conext menus loaded! Directory does not exist.");
+		}
 	}
 
 	async deploy()

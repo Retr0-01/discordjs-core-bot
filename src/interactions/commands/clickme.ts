@@ -2,7 +2,7 @@ import { SlashCommandBuilder, ChatInputCommandInteraction, ActionRowBuilder, But
 import Command from "../../classes/Command";
 
 // Example slash command. Demonstrates button components.
-export default class ClickMe extends Command
+export default class ClickMeCmd extends Command
 {
 	data = new SlashCommandBuilder()
 		.setName("clickme")

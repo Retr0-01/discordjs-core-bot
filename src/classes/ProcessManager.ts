@@ -2,7 +2,6 @@ import DiscordClient from "./DiscordClient";
 
 export default class ProcessManager
 {
-	private static _instance: ProcessManager;
 	readonly client: DiscordClient;
 
 	constructor(client: DiscordClient)

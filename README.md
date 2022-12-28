@@ -81,6 +81,8 @@ If one of your slash commands sends a button through an interaction, you can imp
 You can see the clickme command for a simple implementation of two buttons.
 
 ### Context Menus
+> You are free to delete the context menus directory if you don't want to implement context menus.
+
 Go into ``/interactions/contextMenus/`` and create a new context menu command which derives from the ``ContextMenu`` class. Make sure you also use the correct type in the execute method's interaction parameter according to the type of your context menu (``UserContextMenuInteraction`` for ``ApplicationCommandType.User`` and ``MessageContextMenuInteraction`` for ``ApplicationCommandType.Message``).
 
 ## Using SQLite
