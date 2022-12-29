@@ -27,7 +27,7 @@
     "discord-js"
   ],
   "dependencies": {
-    "@discordjs/rest": "^1.1.0",
+    "@discordjs/rest": "^1.5.0",
     "better-sqlite3": "^8.0.0",
     "discord-api-types": "^0.37.5",
     "discord.js": "^14.3.0"
